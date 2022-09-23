@@ -13,19 +13,20 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        DontDestroyOnLoad(this);
+        if (FindObjectsOfType(GetType()).Length > 1)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-        else
-        {
-            _instance = this;
-        }
+        _instance = this;
     }
 
     public void ReloadScene()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void QuitApplication()
+    {
+        Application.Quit();
     }
 }

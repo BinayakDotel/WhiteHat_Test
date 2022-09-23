@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class ButtonsHandler : MonoBehaviour
 {
-    GameManager game_manager;
-    Button button;
+    [SerializeField] GameManager game_manager;
+    [SerializeField] Button button;
 
     private void Awake()
     {
-        game_manager = GameManager.Instance;
+        game_manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         button = GetComponent<Button>();
 
         button.onClick.AddListener(OnButtonClicked);
@@ -18,6 +18,11 @@ public class ButtonsHandler : MonoBehaviour
         if (this.name == "reloadBtn")
         {
             game_manager.ReloadScene();
+        }
+        if (this.name == "closeBtn")
+        {
+            print("CLOSE");
+            game_manager.QuitApplication();
         }
     }
 }
